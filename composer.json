@@ -1,0 +1,21 @@
+{
+    "name": "earpengai/convert-to-khmer",
+    "description": "Convert Number to Khmer language.",
+    "type": "library",
+    "require": {
+        "php": ">=7.1.3"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Ear Pengai",
+            "email": "pengai.ear@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "ConvertToKhmer\\": "src/"
+        }
+    }
+}
