@@ -6,9 +6,12 @@ class NumberToKhmerWords
 {
     public $value;
 
+    private $config;
+
     public function __construct($value = 0)
     {   
         $this->value = $value;
+        $this->config = new Config();
         return $this;
     }
 
@@ -25,32 +28,32 @@ class NumberToKhmerWords
     public function numberToWord()
     {
         $words = "";
-
-        if ($this->value == 0) {
-            $words = $this->getUnitMap($this->value);
+        $value = $this->value;
+        if ($value == 0) {
+            $words = $this->getUnitMap($value);
         }
-        if (($this->value/1000000) > 0) {
-            $words = $words . $this->prefixNumberToWord($this->value/1000000).$this->getDigitMap(4);
-            $this->value = $this->value % 1000000;
+        if ((int)($value/1000000) > 0) {
+            $words = $words . $this->prefixNumberToWord($value/1000000).$this->config->getDigitMap(4);
+            $value = $value % 1000000;
         }
-        if (($this->value/100000) > 0) {
-            $words = $words . $this->prefixNumberToWord($this->value/100000).$this->getDigitMap(3);
-            $this->value = $this->value % 100000;
+        if ((int)($value/100000) > 0) {
+            $words = $words . $this->prefixNumberToWord($value/100000).$this->config->getDigitMap(3);
+            $value = $value % 100000;
         }
-        if (($this->value/10000) > 0) {
-            $words = $words . $this->prefixNumberToWord($this->value/10000).$this->getDigitMap(2);
-            $this->value = $this->value % 10000;
+        if ((int)($value/10000) > 0) {
+            $words = $words . $this->prefixNumberToWord($value/10000).$this->config->getDigitMap(2);
+            $value = $value % 10000;
         }
-        if (($this->value/1000) > 0) {
-            $words = $words . $this->prefixNumberToWord($this->value/1000).$this->getDigitMap(1);
-            $this->value = $this->value % 1000;
+        if ((int)($value/1000) > 0) {
+            $words = $words . $this->prefixNumberToWord($value/1000).$this->config->getDigitMap(1);
+            $value = $value % 1000;
         }
-        if (($this->value/100) > 0) {
-            $words = $words . $this->prefixNumberToWord($this->value/1000).$this->getDigitMap(0);
-            $this->value = $this->value % 100;
+        if ((int)($value/100) > 0) {
+            $words = $words . $this->prefixNumberToWord($value/100).$this->config->getDigitMap(0);
+            $value = $value % 100;
         }
-        if ($this->value > 0) {
-            $words = $words . $this->prefixNumberToWord($this->value);
+        if ($value > 0) {
+            $words = $words . $this->prefixNumberToWord($value);
         }
         return $words;
     }
@@ -58,19 +61,23 @@ class NumberToKhmerWords
     private function prefixNumberToWord(int $value)
     {
         $words = "";
-
         if ($value == 0) {
-            return $this->getUnitMap($value);
+            return $this->config->getUnitMap($value);
         }
 
         if ($value >= 100) {
-            $words = $words . $this->numberToWord($value);
+            $this->value = $value;
+            $words = $words . $this->numberToWord();
         } else {
-            if (($value % 10) > 0) {
-                $words = $words . $this->getTenMap($value/10.0);
-                $words = $words . $this->getUnitMap($value % 10);
+            if ($value <= 10) {
+                $words = $words . $this->config->getUnitMap((int)$value);
             } else {
-                $words = $this->getTenMap($value / 10);
+                if ((int)($value%10) > 0) {
+                    $words = $words . $this->config->getTenMap((int)$value/10.0);
+                    $words = $words . $this->config->getUnitMap((int)$value%10);
+                } else {
+                    $words = $this->config->getTenMap((int)$value/10);
+                }
             }
         }
 
