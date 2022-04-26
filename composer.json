@@ -12,6 +12,7 @@
             "email": "pengai.ear@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "ConvertToKhmer\\": "src/"
