@@ -15,20 +15,20 @@ class NumberToKhmerWords
         return $this;
     }
 
-    public static function instance($value)
+    public static function instance()
     {
         $instance = new static;
-        if (!is_numeric($value)) {
-            throw new Exception('Undefined value format');
-        }
-        $instance->value = $value;
+        // if (!is_numeric($value)) {
+        //     throw new Exception('Undefined value format');
+        // }
+        // $instance->value = $value;
         return $instance;
     }
 
-    public function numberToWord()
+    public function numberToWord($value)
     {
         $words = "";
-        $value = $this->value;
+        // $value = $this->value;
         if ($value == 0) {
             $words = $this->getUnitMap($value);
         }
@@ -58,7 +58,32 @@ class NumberToKhmerWords
         return $words;
     }
 
-    private function prefixNumberToWord(int $value)
+    public function accNumberToWord($value)
+    {
+        $words = "";
+        // $value = $this->value;
+        if ($value == 0) {
+            $words = $this->getUnitMap($value);
+        }
+        if ((int)($value/1000000) > 0) {
+            $words = $words . $this->prefixNumberToWord($value/1000000).$this->config->getDigitMap(4);
+            $value = $value % 1000000;
+        }
+        if ((int)($value/1000) > 0) {
+            $words = $words . $this->prefixNumberToWord($value/1000).$this->config->getDigitMap(1);
+            $value = $value % 1000;
+        }
+        if ((int)($value/100) > 0) {
+            $words = $words . $this->prefixNumberToWord($value/100).$this->config->getDigitMap(0);
+            $value = $value % 100;
+        }
+        if ($value > 0) {
+            $words = $words . $this->prefixNumberToWord($value);
+        }
+        return $words;
+    }
+
+    private function prefixNumberToWord(int $value  )
     {
         $words = "";
         if ($value == 0) {
@@ -66,8 +91,8 @@ class NumberToKhmerWords
         }
 
         if ($value >= 100) {
-            $this->value = $value;
-            $words = $words . $this->numberToWord();
+            // $this->value = $value;
+            $words = $words . $this->numberToWord($value);
         } else {
             if ($value <= 10) {
                 $words = $words . $this->config->getUnitMap((int)$value);
