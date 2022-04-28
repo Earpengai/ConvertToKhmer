@@ -1,4 +1,5 @@
 # The PHP library for convert number to Khmer word.
+[![PHP Composer](https://github.com/Earpengai/ConvertToKhmer/actions/workflows/php.yml/badge.svg)](https://github.com/Earpengai/ConvertToKhmer/actions/workflows/php.yml)
 
 Package help you to convert number to khmer word.
 
