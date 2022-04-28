@@ -1,3 +1,11 @@
-## How to Setup App project.
+# The PHP libray for convert number to khmer word
 
-Clone project to your local enviroment
+Package help you to convert number to khmer word.
+
+## Requirements
+
+- PHP 7.0 or higher
+
+## Setup
+
+composer require earpengai/convert-to-khmer
