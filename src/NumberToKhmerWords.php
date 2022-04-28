@@ -18,10 +18,7 @@ class NumberToKhmerWords
     public static function instance()
     {
         $instance = new static;
-        // if (!is_numeric($value)) {
-        //     throw new Exception('Undefined value format');
-        // }
-        // $instance->value = $value;
+
         return $instance;
     }
 
@@ -61,7 +58,6 @@ class NumberToKhmerWords
     public function accNumberToWord($value)
     {
         $words = "";
-        // $value = $this->value;
         if ($value == 0) {
             $words = $this->getUnitMap($value);
         }
@@ -83,15 +79,14 @@ class NumberToKhmerWords
         return $words;
     }
 
-    private function prefixNumberToWord(int $value  )
+    private function prefixNumberToWord(int $value)
     {
         $words = "";
         if ($value == 0) {
             return $this->config->getUnitMap($value);
         }
-
+        print_r(parent);
         if ($value >= 100) {
-            // $this->value = $value;
             $words = $words . $this->numberToWord($value);
         } else {
             if ($value <= 10) {
