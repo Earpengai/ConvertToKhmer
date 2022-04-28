@@ -1,4 +1,4 @@
-# The PHP libray for convert number to khmer word
+# The PHP library for convert number to Khmer word.
 
 Package help you to convert number to khmer word.
 
