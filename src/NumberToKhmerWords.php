@@ -85,7 +85,6 @@ class NumberToKhmerWords
         if ($value == 0) {
             return $this->config->getUnitMap($value);
         }
-        print_r(parent);
         if ($value >= 100) {
             $words = $words . $this->numberToWord($value);
         } else {
