@@ -33,7 +33,7 @@ NumberToKhmerWords::instance()->accNumberToWord(987654321); //ប្រាំប
 ```
 ## License
 
-This package operates under the MIT License (MIT). See the [LICENSE](https://github.com/Earpengai/ConvertToKhmer/edit/master/README.md) file for details.
+This package operates under the MIT License (MIT). See the [LICENSE](https://github.com/Earpengai/ConvertToKhmer/edit/master/LICENSE.txt) file for details.
 
 
 
